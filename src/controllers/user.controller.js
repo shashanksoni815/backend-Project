@@ -16,29 +16,33 @@ const registerUser = asyncHandler( async (req, res) => {
     // remove password and refresh token field from response
     // check for user creation and then response
 
-    const { fullName, email, username, password } = req.body;
+//     const { fullName, email, username, password } = req.body;
 
-const fields = { fullName, email, username, password };
+// const fields = { fullName, email, username, password };
 
-for (const [key, value] of Object.entries(fields)) {
-  if (typeof value !== "string" || value.trim() === "") {
-    throw new ApiError(400, `${key} is required`);
-  }
-}
+// for (const [key, value] of Object.entries(fields)) {
+//   if (typeof value !== "string" || value.trim() === "") {
+//     throw new ApiError(400, `${key} is required`);
+//   }
+// }
+
+// console.log("req.body : ", req.body)
 
 
-    // const {fullName, email, username, password } = req.body
-    // // console.log(email, "Email");
+    const {fullName, email, username, password } = req.body
+    // console.log(email, "Email");
 
-    // if (!password) {
-    // throw new ApiError(400, "Password is required");
-    // }
+    console.log("req.body : ", req.body)
 
-    // if (
-    //     [fullName, email, username, password].some((field) => field?.trim() === "")
-    // ) {
-    //     throw new ApiError(400, "All fields are required")
-    // }
+    if (!password) {
+    throw new ApiError(400, "Password is required");
+    }
+
+    if (
+        [fullName, email, username, password].some((field) => field?.trim() === "")
+    ) {
+        throw new ApiError(400, "All fields are required")
+    }
 
     const existedUser = await User.findOne({
         $or: [{ username }, { email }]
