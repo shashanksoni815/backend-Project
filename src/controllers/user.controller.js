@@ -4,6 +4,7 @@ import { User } from "../models/user.model.js"
 import { uploadOnCloudinary } from "../utils/Cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 // import { upload } from "../middlewares/multer.middleware.js";
+import { app } from "../app.js";
 
 const generateAccessAndRefreshToken = async( userId ) => {
     try {
@@ -149,12 +150,15 @@ const loginUser = asyncHandler(async (req, res) => {
     // password check
     // acces and refresh token
     // send cookies
-    console.log(req.body)
+    // console.log(req.body)
+    console.log("Headers:", req.headers);
+console.log("Body:", req.body);
+
     const {email, username, password } = req.body
     
     //const {email, username, password} = req.body
-    console.log("Body keys:", Object.keys(req.body));
-    console.log(req.body)
+    // console.log("Body keys:", Object.keys(req.body));
+    console.log("req.body : ", req.body)
     if(!username && !email) {
         throw new ApiError(400, "username or email is required")
     }
