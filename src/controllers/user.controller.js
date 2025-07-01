@@ -282,7 +282,9 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
     user.password = newPassword
     await user.save({validateBeforeSave: false})
 
-    return res.status200
+    return res
+    .status(200)
+    .json(new ApiResponse(200, {}, "Password change successfully" ))
 })
 
 export { registerUser, loginUser, logoutUser, refreshAccessToken }
